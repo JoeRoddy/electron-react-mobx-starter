@@ -1,12 +1,12 @@
-import { spawn } from 'child_process';
-import electron from 'electron';
-import browserSync from 'browser-sync';
-import browserSyncConnectUtils from 'browser-sync/lib/connect-utils';
+import { spawn } from "child_process";
+import electron from "electron";
+import browserSync from "browser-sync";
+import browserSyncConnectUtils from "browser-sync/lib/connect-utils";
 
 const bsync = browserSync.create();
 
 const getRootUrl = options => {
-  const port = options.get('port');
+  const port = options.get("port");
   return `http://localhost:${port}`;
 };
 
@@ -33,21 +33,21 @@ bsync.init(
   (err, bs) => {
     if (err) return console.error(err);
 
-    const child = spawn(electron, ['.'], {
+    const child = spawn(electron, ["."], {
       env: {
         ...{
-          NODE_ENV: 'development',
+          NODE_ENV: "development",
           BROWSER_SYNC_CLIENT_URL: getClientUrl(bs.options)
         },
         ...process.env
       },
-      stdio: 'inherit'
+      stdio: "inherit"
     });
 
-    child.on('close', () => {
+    child.on("close", () => {
       process.exit();
     });
 
-    bsync.watch('build/**/*').on('change', bsync.reload);
+    bsync.watch("build/**/*").on("change", bsync.reload);
   }
 );

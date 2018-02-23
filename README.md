@@ -16,4 +16,5 @@ Getting Started
 ## Package App
 
 Choose the corresponding system to package the app:
+
 `yarn run pack:mac|win|linux`
